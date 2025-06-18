@@ -1,8 +1,18 @@
 import { View, Text, Button } from 'react-native';
-import { useRouter } from 'expo-router';
+import { StackNavigationProp } from '@react-navigation/stack';
+import { useNavigation } from '@react-navigation/native';
+
+// Definir os nomes das rotas
+export type RootStackParamList = {
+  Login: undefined;
+  TiposDesastres: undefined;
+  DetalhesDesastre: { id: string; nome: string; descricao: string; dicas: string };
+  RegistrarAlerta: undefined;
+  AlertasSalvos: undefined;
+};
 
 export default function LoginScreen() {
-  const router = useRouter();
+  const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
 
   return (
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
@@ -10,12 +20,12 @@ export default function LoginScreen() {
       <Text style={{ fontSize: 10, marginBottom: 34 }}>App da substitutiva de mobile!</Text>
       <Button
         title="Tipos de Desastres"
-        onPress={() => router.push('/tiposDesastres')}
+        onPress={() => navigation.navigate('TiposDesastres')}
       />
       <View style={{ height: 16 }} />
       <Button
         title="Alertas Salvos"
-        onPress={() => router.push('/alertasSalvos')}
+        onPress={() => navigation.navigate('AlertasSalvos')}
       />
     </View>
   );
